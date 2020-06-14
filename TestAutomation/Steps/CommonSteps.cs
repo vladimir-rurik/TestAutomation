@@ -1,7 +1,9 @@
-﻿using RestSharp;
+﻿using EnumsNET;
+using RestSharp;
 using System;
 using TechTalk.SpecFlow;
 using TestAutomation.Base;
+using static TestAutomation.Base.Enumerations;
 
 namespace TestAutomation.Steps
 {
@@ -19,7 +21,7 @@ namespace TestAutomation.Steps
         public void GivenASsmpleRequestWithAJsonContentType()
         {
             _httpClient.Request = new RestRequest(_httpClient.ApiMethodPath, Method.POST);
-            _httpClient.Request.AddHeader("Content-Type", "application/json");
+            _httpClient.Request.AddHeader(Headers.ContentType.AsString(EnumFormat.Description), "application/json");
         }
     }
 }

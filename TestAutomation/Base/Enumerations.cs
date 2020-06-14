@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestAutomation.Base
 {
-    public static class Enumerations
+    public class Enumerations
     {
         public enum Headers
         {

@@ -14,6 +14,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MongoDB.Bson;
+using Microsoft.Extensions.Configuration;
 
 namespace TestAutomation.Hooks
 {
@@ -35,13 +36,23 @@ namespace TestAutomation.Hooks
             _scenarioContext = scenarioContext;
         }
 
+        public static IConfiguration InitConfiguration()
+        {
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.test.json")
+                .Build();
+            return config;
+        }
+
         [BeforeScenario]
         public void TestSetup()
         {
-            _httpCleint.BaseUrl = new Uri("https://api-test.afterpay.dev/");
+            IConfiguration config = InitConfiguration();
+
+            _httpCleint.BaseUrl = new Uri(config["baseUrl"]);
             _httpCleint.RestClient.BaseUrl = _httpCleint.BaseUrl;
 
-            _httpCleint.ApiMethodPath = "api/v3/validate/bank-account";
+            _httpCleint.ApiMethodPath = config["apiMethodPath"];
         }
 
         [BeforeTestRun]
