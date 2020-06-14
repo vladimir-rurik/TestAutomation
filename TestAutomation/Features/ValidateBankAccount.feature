@@ -9,6 +9,6 @@ Scenario: Verify an error response to a sample request without a JWT token
 
 @negativeCase
 Scenario: Verify an error response to a sample request with an empty JWT token
-	Given a sample request without a JWT token
+	Given a sample request with an empty JWT token
 	When the sample request is posted to api
 	Then Api returns "message" name as "Authorization has been denied for this request."

@@ -143,7 +143,7 @@ namespace TestAutomation.Hooks
                 //uri = _restClient.BuildUri(request),
             };
 
-            string json = JsonConvert.SerializeObject(new { request = requestToLog });
+            string json = JsonConvert.SerializeObject(new { Request = requestToLog });
             return JValue.Parse(json).ToString(Formatting.Indented);
         }
 
@@ -159,7 +159,7 @@ namespace TestAutomation.Hooks
                 errorMessage = response.ErrorMessage,
             };
 
-            string json = JsonConvert.SerializeObject(new { response = responseToLog });
+            string json = JsonConvert.SerializeObject(new { Response = responseToLog });
 
             return JValue.Parse(json).ToString(Formatting.Indented);
 

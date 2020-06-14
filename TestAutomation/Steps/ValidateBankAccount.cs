@@ -29,6 +29,22 @@ namespace TestAutomation.Steps
         public void SampleRequestWithoutJWTtoken()
         {
             _settings.Request = new RestRequest(_settings.ApiMethodPath, Method.POST);
+            _settings.Request.AddHeader("Content-Type", "application/json");
+
+            BankAccountDTO bankAccountDTO = new BankAccountDTO()
+            {
+                BankAccount = "GB09HAOE91311808002317"
+            };
+            _settings.Request.AddJsonBody(bankAccountDTO);
+        }
+
+        [Given(@"a sample request with an empty JWT token")]
+        public void SampleRequestWithEmptyJWTtoken()
+        {
+            _settings.Request = new RestRequest(_settings.ApiMethodPath, Method.POST);
+            _settings.Request.AddHeader("Content-Type", "application/json");
+            _settings.Request.AddHeader("X-Auth-Key", "");
+
             BankAccountDTO bankAccountDTO = new BankAccountDTO()
             {
                 BankAccount = "GB09HAOE91311808002317"
