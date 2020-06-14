@@ -20,12 +20,12 @@ using static TestAutomation.Base.Enumerations;
 namespace TestAutomation.Steps
 {
     [Binding]
-    class ValidateBankAccount
+    class BankAccountValidation
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _config;
 
-        public ValidateBankAccount(HttpClient httpClient, IConfiguration config)
+        public BankAccountValidation(HttpClient httpClient, IConfiguration config)
         { 
             _httpClient = httpClient;
             _config = config;
@@ -41,12 +41,12 @@ namespace TestAutomation.Steps
             _httpClient.Request.AddJsonBody(bankAccountDTO);
         }
 
-        [Given(@"the sample request with an empty JWT token and (.*)")]
-        public void SampleRequestWithEmptyJWTtoken(BankAccountDTO bankAccountDTO)
+        [Given(@"the sample request with an empty JWT token and ""(.*)""")]
+        public void SampleRequestWithEmptyJWTtoken(string bankAccount)
         {
             _httpClient.Request.AddHeader(Headers.X_Auth_Key.AsString(EnumFormat.Description), "");
 
-            _httpClient.Request.AddJsonBody(bankAccountDTO);
+            _httpClient.Request.AddJsonBody(new BankAccountDTO());
         }
 
         [When(@"the sample request is posted to api")]

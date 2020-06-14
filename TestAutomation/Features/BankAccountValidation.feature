@@ -1,4 +1,4 @@
-﻿Feature: ValidateBankAccount
+﻿Feature: BankAccountValidation
 	Validates and evaluates the account in the context of direct debit payment.
 
 Background: 
@@ -12,7 +12,7 @@ Scenario: Verify an error response to a sample request without a JWT token
 
 @negativeCase
 Scenario Outline: Verify an error response to a sample request with an empty JWT token
-	Given tha sample request with an empty JWT token and <bankAccount>
+	Given the sample request with an empty JWT token and "<bankAccount>"
 	When the sample request is posted to api
 	Then Api returns "message" name as "Authorization has been denied for this request."
 
