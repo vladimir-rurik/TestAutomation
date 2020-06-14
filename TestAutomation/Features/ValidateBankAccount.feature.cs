@@ -73,6 +73,15 @@ namespace TestAutomation.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 4
+#line hidden
+#line 5
+ testRunner.Given("a ssmple request with a json content type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request without a JWT token")]
         [NUnit.Framework.CategoryAttribute("negativeCase")]
@@ -82,7 +91,7 @@ namespace TestAutomation.Features
                     "negativeCase"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request without a JWT token", null, new string[] {
                         "negativeCase"});
-#line 5
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -102,13 +111,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
- testRunner.Given("a sample request with an empty JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 4
+this.FeatureBackground();
 #line hidden
-#line 7
+#line 9
+ testRunner.Given("a sample request without a JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 10
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 8
+#line 11
  testRunner.Then("Api returns \"message\" name as \"Authorization has been denied for this request.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -124,7 +136,7 @@ this.ScenarioInitialize(scenarioInfo);
                     "negativeCase"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request with an empty JWT token", null, new string[] {
                         "negativeCase"});
-#line 11
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -144,13 +156,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 12
+#line 4
+this.FeatureBackground();
+#line hidden
+#line 15
  testRunner.Given("a sample request with an empty JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 13
+#line 16
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 14
+#line 17
  testRunner.Then("Api returns \"message\" name as \"Authorization has been denied for this request.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

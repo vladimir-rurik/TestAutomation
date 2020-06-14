@@ -41,8 +41,6 @@ namespace TestAutomation.Steps
         [Given(@"a sample request with an empty JWT token")]
         public void SampleRequestWithEmptyJWTtoken()
         {
-            _httpClient.Request = new RestRequest(_httpClient.ApiMethodPath, Method.POST);
-            _httpClient.Request.AddHeader("Content-Type", "application/json");
             _httpClient.Request.AddHeader("X-Auth-Key", "");
 
             BankAccountDTO bankAccountDTO = new BankAccountDTO()

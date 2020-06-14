@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using RestSharp;
+using System;
 using TechTalk.SpecFlow;
 using TestAutomation.Base;
 
@@ -16,11 +15,12 @@ namespace TestAutomation.Steps
             _httpClient = httpClient;
         }
 
-        [Given(@"a sample request with a json content type")]
-        public void GivenSimpleRequestWithJsonContentType()
+        [Given(@"a ssmple request with a json content type")]
+        public void GivenASsmpleRequestWithAJsonContentType()
         {
-            ScenarioContext.Current.Pending();
+            _httpClient.Request = new RestRequest(_httpClient.ApiMethodPath, Method.POST);
+            _httpClient.Request.AddHeader("Content-Type", "application/json");
         }
-
     }
 }
+
