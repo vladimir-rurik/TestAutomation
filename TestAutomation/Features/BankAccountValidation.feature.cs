@@ -83,14 +83,22 @@ namespace TestAutomation.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request without a JWT token")]
+        [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request WITHOUT a JWT token and different ba" +
+            "nk accounts")]
         [NUnit.Framework.CategoryAttribute("negativeCase")]
-        public virtual void VerifyAnErrorResponseToASampleRequestWithoutAJWTToken()
+        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002317", "message", "Authorization has been denied for this request.", null)]
+        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002318", "message", "Authorization has been denied for this request.", null)]
+        public virtual void VerifyAnErrorResponseToASampleRequestWITHOUTAJWTTokenAndDifferentBankAccounts(string bankAccount, string errorKey, string errorValue, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "negativeCase"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request without a JWT token", null, new string[] {
-                        "negativeCase"});
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request WITHOUT a JWT token and different ba" +
+                    "nk accounts", null, @__tags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -115,7 +123,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 9
- testRunner.Given("the sample request without a JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("the sample request without a JWT token and \"{0}\"", bankAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 10
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -128,15 +136,23 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request with an empty JWT token")]
+        [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request with an EMPTY JWT token and differen" +
+            "t bank accounts")]
         [NUnit.Framework.CategoryAttribute("negativeCase")]
-        public virtual void VerifyAnErrorResponseToASampleRequestWithAnEmptyJWTToken()
+        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002317", "message", "Authorization has been denied for this request.", null)]
+        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002318", "message", "Authorization has been denied for this request.", null)]
+        public virtual void VerifyAnErrorResponseToASampleRequestWithAnEMPTYJWTTokenAndDifferentBankAccounts(string bankAccount, string errorKey, string errorValue, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "negativeCase"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request with an empty JWT token", null, new string[] {
-                        "negativeCase"});
-#line 14
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request with an EMPTY JWT token and differen" +
+                    "t bank accounts", null, @__tags);
+#line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -159,14 +175,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-#line 15
- testRunner.Given("the sample request with an empty JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 19
+ testRunner.Given(string.Format("the sample request with an empty JWT token and \"{0}\"", bankAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 16
+#line 20
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 17
- testRunner.Then("Api returns \"message\" name as \"Authorization has been denied for this request.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 21
+ testRunner.Then(string.Format("Api returns \"{0}\" name as \"{1}\"", errorKey, errorValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

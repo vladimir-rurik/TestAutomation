@@ -29,15 +29,13 @@ namespace TestAutomation.Hooks
 
         private ExtentTest _scenario;
         private HttpClient _httpClient;
-        private ConfigSettings _config;
         private ScenarioContext _scenarioContext;
 
 
-        public Binding(HttpClient httpClient, ScenarioContext scenarioContext, ConfigSettings config)
+        public Binding(HttpClient httpClient, ScenarioContext scenarioContext)
         {
             _httpClient = httpClient;
             _scenarioContext = scenarioContext;
-            _config = config;
         }
 
 
@@ -45,13 +43,15 @@ namespace TestAutomation.Hooks
         [BeforeScenario]
         public void TestSetup()
         {
-            _httpClient.RestClient.BaseUrl = _config.BaseUrl;
-            _httpClient.ApiMethodPath = _config.ApiMethodPath;
+            _httpClient.RestClient.BaseUrl = ConfigSettings.BaseUrl;
+            _httpClient.ApiMethodPath = ConfigSettings.ApiMethodPath;
         }
 
         [BeforeTestRun]
         public static void InitializeReport()
         {
+            new ConfigSettings();
+
             string file = "ExtentReport.html";
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, file);
 

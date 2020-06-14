@@ -10,9 +10,9 @@ namespace TestAutomation.Base
     {
         private static IConfiguration _config;
 
-        public Uri BaseUrl { get; set; }
-        public string ApiMethodPath { get; set; }
-        public string ValidToken { get; set; }
+        public static Uri BaseUrl { get; set; }
+        public static string ApiMethodPath { get; set; }
+        public static string ValidToken { get; set; }
 
         public ConfigSettings()
         {
