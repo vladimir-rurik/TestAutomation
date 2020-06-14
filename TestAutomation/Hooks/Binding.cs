@@ -12,6 +12,8 @@ using NUnit.Framework;
 using RestSharp;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using MongoDB.Bson;
 
 namespace TestAutomation.Hooks
 {
@@ -86,8 +88,8 @@ namespace TestAutomation.Hooks
                         break;
                     case nameof(When):
                         _scenario.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text);
-                        //_scenario.CreateNode<When>($"<pre>{LogRequest(_settings.Request)}</pre>");
-                        //_scenario.CreateNode<When>($"<pre>{LogResponse(_settings.Response)}</pre>");
+                        _scenario.CreateNode<When>($"<pre>{LogRequest(_settings.Request)}</pre>");
+                        _scenario.CreateNode<When>($"<pre>{LogResponse(_settings.Response)}</pre>");
 
                         break;
                     case nameof(Then):
@@ -141,7 +143,8 @@ namespace TestAutomation.Hooks
                 //uri = _restClient.BuildUri(request),
             };
 
-            return JsonConvert.SerializeObject(new { requestToLog });
+            string json = JsonConvert.SerializeObject(new { request = requestToLog });
+            return JValue.Parse(json).ToString(Formatting.Indented);
         }
 
         private string LogResponse(IRestResponse response)
@@ -156,7 +159,10 @@ namespace TestAutomation.Hooks
                 errorMessage = response.ErrorMessage,
             };
 
-            return JsonConvert.SerializeObject(new { responseToLog });
+            string json = JsonConvert.SerializeObject(new { response = responseToLog });
+
+            return JValue.Parse(json).ToString(Formatting.Indented);
+
         }
 
     }
