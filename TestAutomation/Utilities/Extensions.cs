@@ -11,10 +11,12 @@ namespace TestAutomation.Utilities
     public static class Extensions
     {
 
-        public static string GetResponseObject(this IRestResponse response, string responseObject)
+        public static string GetResponseContentObject(this IRestResponse response, string responseObject)
         {
-            JObject obs = JObject.Parse(response.Content);
-            return obs[responseObject].ToString();
+            JObject obj = JObject.Parse(response.Content.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' }));
+
+            obj[responseObject] ??= "";
+            return obj[responseObject].ToString();
         }
 
     }

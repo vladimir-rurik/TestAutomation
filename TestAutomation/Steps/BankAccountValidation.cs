@@ -1,15 +1,9 @@
-﻿using AventStack.ExtentReports;
-using AventStack.ExtentReports.Configuration;
-using AventStack.ExtentReports.Reporter;
+﻿
 using EnumsNET;
-using Microsoft.Extensions.Configuration;
-using MongoDB.Bson;
 using NUnit.Framework;
-using RestSharp;
-using RestSharp.Serialization;
-using RestSharp.Serialization.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
 using TestAutomation.Base;
@@ -58,13 +52,31 @@ namespace TestAutomation.Steps
             _httpClient.Request.AddJsonBody(new BankAccountDTO() { BankAccount = bankAccount });
         }
 
-
-
         [Then(@"Api returns ""(.*)"" name as ""(.*)""")]
         public void ApiReturns(string key, string value)
         {
-            var responseValue = _httpClient.Response.GetResponseObject(key);
-            Assert.That(responseValue, Is.EqualTo(value), $"The {key} is not matching.");
+            if (key.First() == '*') //Regex
+            {
+                key = key.Substring(1);
+                var responseValue = _httpClient.Response.GetResponseContentObject(key);
+
+                Assert.That(responseValue, Does.Match(value), $"The content key:{key} is not matching.");
+            }
+            else
+            {
+                var responseValue = _httpClient.Response.GetResponseContentObject(key);
+
+                Assert.That(responseValue, Is.EqualTo(value), $"The content key:{key} is not matching.");
+            }
         }
+
+        [Then(@"Api returns StatusCode name as ""(.*)""")]
+        public void ThenApiReturnsStatusCodeNameAs(int value)
+        {
+            int statusCode = (int) _httpClient.Response.StatusCode;
+            Assert.That(statusCode, Is.EqualTo(value));
+
+        }
+
     }
 }

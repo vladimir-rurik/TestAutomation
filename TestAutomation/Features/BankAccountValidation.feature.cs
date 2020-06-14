@@ -86,9 +86,9 @@ namespace TestAutomation.Features
         [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request WITHOUT a JWT token and different ba" +
             "nk accounts")]
         [NUnit.Framework.CategoryAttribute("negativeCase")]
-        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002317", "message", "Authorization has been denied for this request.", null)]
-        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002318", "message", "Authorization has been denied for this request.", null)]
-        public virtual void VerifyAnErrorResponseToASampleRequestWITHOUTAJWTTokenAndDifferentBankAccounts(string bankAccount, string errorKey, string errorValue, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "GB09HAOE91311808002317", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "GB09HAOE91311808002318", null)]
+        public virtual void VerifyAnErrorResponseToASampleRequestWITHOUTAJWTTokenAndDifferentBankAccounts(string description, string bankAccount, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "negativeCase"};
@@ -129,7 +129,10 @@ this.FeatureBackground();
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
- testRunner.Then("Api returns \"message\" name as \"Authorization has been denied for this request.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Api returns StatusCode name as \"401\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 14
+  testRunner.And("Api returns \"message\" name as \"Authorization has been denied for this request.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -139,9 +142,9 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request with an EMPTY JWT token and differen" +
             "t bank accounts")]
         [NUnit.Framework.CategoryAttribute("negativeCase")]
-        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002317", "message", "Authorization has been denied for this request.", null)]
-        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002318", "message", "Authorization has been denied for this request.", null)]
-        public virtual void VerifyAnErrorResponseToASampleRequestWithAnEMPTYJWTTokenAndDifferentBankAccounts(string bankAccount, string errorKey, string errorValue, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "GB09HAOE91311808002317", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "GB09HAOE91311808002318", null)]
+        public virtual void VerifyAnErrorResponseToASampleRequestWithAnEMPTYJWTTokenAndDifferentBankAccounts(string description, string bankAccount, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "negativeCase"};
@@ -152,7 +155,7 @@ this.FeatureBackground();
             string[] tagsOfScenario = @__tags;
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request with an EMPTY JWT token and differen" +
                     "t bank accounts", null, @__tags);
-#line 22
+#line 23
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -175,37 +178,40 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-#line 23
+#line 24
  testRunner.Given(string.Format("the sample request with an empty JWT token and \"{0}\"", bankAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 24
+#line 25
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 25
- testRunner.Then(string.Format("Api returns \"{0}\" name as \"{1}\"", errorKey, errorValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 26
+ testRunner.Then("Api returns StatusCode name as \"401\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 27
+  testRunner.And("Api returns \"message\" name as \"Authorization has been denied for this request.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify a valid response to a sample request with a VALID JWT token and different " +
-            "bank accounts")]
-        [NUnit.Framework.CategoryAttribute("positiveCase")]
-        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002317", "isValid", "True", null)]
-        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002318", "isValid", "True", null)]
-        public virtual void VerifyAValidResponseToASampleRequestWithAVALIDJWTTokenAndDifferentBankAccounts(string bankAccount, string errorKey, string errorValue, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Verify a length based validation for a sample request with a VALID JWT token and " +
+            "different bank accounts")]
+        [NUnit.Framework.CategoryAttribute("lenthValidation")]
+        [NUnit.Framework.TestCaseAttribute("IBAN length > 34", "GB2345678901234567890123456789012345", "400", "400\\.00.", null)]
+        [NUnit.Framework.TestCaseAttribute("IBAN length < 7", "GB345", "400", "400\\.00.", null)]
+        public virtual void VerifyALengthBasedValidationForASampleRequestWithAVALIDJWTTokenAndDifferentBankAccounts(string description, string bankAccount, string statusCode, string code, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "positiveCase"};
+                    "lenthValidation"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             string[] tagsOfScenario = @__tags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify a valid response to a sample request with a VALID JWT token and different " +
-                    "bank accounts", null, @__tags);
-#line 34
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify a length based validation for a sample request with a VALID JWT token and " +
+                    "different bank accounts", null, @__tags);
+#line 36
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -228,14 +234,78 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-#line 35
+#line 37
  testRunner.Given(string.Format("the sample request with a valid JWT token and \"{0}\"", bankAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 36
+#line 38
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 37
- testRunner.Then(string.Format("Api returns \"{0}\" name as \"{1}\"", errorKey, errorValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 39
+ testRunner.Then(string.Format("Api returns StatusCode name as \"{0}\"", statusCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 40
+  testRunner.And(string.Format("Api returns \"*code\" name as \"{0}\"", code), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify an external validation for a sample request with a VALID JWT token and dif" +
+            "ferent bank accounts")]
+        [NUnit.Framework.CategoryAttribute("externalValidation")]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "GB09HAOE91311808002317", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "GB09HAOE91311808002318", "200", "False", "^(?!\\s*$).+", null)]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "DE87123456781234567890", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "DE87123456781234567891", "200", "False", "^(?!\\s*$).+", null)]
+        public virtual void VerifyAnExternalValidationForASampleRequestWithAVALIDJWTTokenAndDifferentBankAccounts(string description, string bankAccount, string statusCode, string isValid, string riskCheckMessages, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "externalValidation"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an external validation for a sample request with a VALID JWT token and dif" +
+                    "ferent bank accounts", null, @__tags);
+#line 49
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+this.FeatureBackground();
+#line hidden
+#line 50
+ testRunner.Given(string.Format("the sample request with a valid JWT token and \"{0}\"", bankAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 51
+ testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 52
+ testRunner.Then(string.Format("Api returns StatusCode name as \"{0}\"", statusCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 53
+  testRunner.And(string.Format("Api returns \"isValid\" name as \"{0}\"", isValid), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 54
+  testRunner.And(string.Format("Api returns \"*riskCheckMessages\" name as \"{0}\"", riskCheckMessages), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

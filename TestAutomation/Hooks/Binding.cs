@@ -1,22 +1,15 @@
 ﻿
 using TestAutomation.Base;
 using System;
-using System.Configuration;
 using System.IO;
 using TechTalk.SpecFlow;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Gherkin.Model;
-using AventStack.ExtentReports.Model;
-using NUnit.Framework;
 using RestSharp;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using MongoDB.Bson;
-using Microsoft.Extensions.Configuration;
-using System.ComponentModel;
-using AventStack.ExtentReports.Configuration;
 
 namespace TestAutomation.Hooks
 {
