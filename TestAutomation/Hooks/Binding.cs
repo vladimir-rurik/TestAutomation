@@ -7,6 +7,11 @@ using TechTalk.SpecFlow;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Gherkin.Model;
+using AventStack.ExtentReports.Model;
+using NUnit.Framework;
+using RestSharp;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace TestAutomation.Hooks
 {
@@ -15,9 +20,9 @@ namespace TestAutomation.Hooks
     {
         //Global Variable for Extend report
         private static ExtentTest _featureName;
-        private static ExtentTest _scenario;
         private static AventStack.ExtentReports.ExtentReports _extent;
 
+        private ExtentTest _scenario;
         private Settings _settings;
         private ScenarioContext _scenarioContext;
 
@@ -41,13 +46,13 @@ namespace TestAutomation.Hooks
         public static void InitializeReport()
         {
             string file = "ExtentReport.html";
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, file);
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, file);
 
-            //Initialize Extent report before test starts
-            var htmlReporter = new ExtentHtmlReporter(path);
+            //Initialize an Extent report before starting the test
+            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(path);
             htmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
 
-            //Attach report to reporter
+            //Attach the report to the reporter
             _extent = new AventStack.ExtentReports.ExtentReports();
             _extent.AttachReporter(htmlReporter);
         }
@@ -55,14 +60,14 @@ namespace TestAutomation.Hooks
         [AfterTestRun]
         public static void TearDownReport()
         {
-            //Flush report once test completes
+            //Flush the report once the test is completed
             _extent.Flush();
         }
 
         [BeforeFeature]
         public static void BeforeFeature(FeatureContext featureContext)
         {
-            //Create dynamic feature name
+            //Create a dynamic feature name
             _featureName = _extent.CreateTest<Feature>(featureContext.FeatureInfo.Title);
         }
 
@@ -70,7 +75,7 @@ namespace TestAutomation.Hooks
         public void InsertReportingSteps()
         {
 
-            var stepType = _scenarioContext.StepContext.StepInfo.StepDefinitionType.ToString();
+            string stepType = _scenarioContext.StepContext.StepInfo.StepDefinitionType.ToString();
 
             if (_scenarioContext.TestError == null)
             {
@@ -81,6 +86,9 @@ namespace TestAutomation.Hooks
                         break;
                     case nameof(When):
                         _scenario.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text);
+                        //_scenario.CreateNode<When>($"<pre>{LogRequest(_settings.Request)}</pre>");
+                        //_scenario.CreateNode<When>($"<pre>{LogResponse(_settings.Response)}</pre>");
+
                         break;
                     case nameof(Then):
                         _scenario.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text);
@@ -107,13 +115,50 @@ namespace TestAutomation.Hooks
             }
         }
 
-
         [BeforeScenario]
         public void Initialize()
         {
-            //Create dynamic scenario name
+            //Create a dynamic scenario name
             _scenario = _featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
         }
 
+        private string LogRequest(IRestRequest request)
+        {
+            var requestToLog = new
+            {
+                resource = request.Resource,
+                // Parameters are custom anonymous objects in order to have the parameter type as a nice string
+                // otherwise it will just show the enum value
+                parameters = request.Parameters.Select(parameter => new
+                {
+                    name = parameter.Name,
+                    value = parameter.Value,
+                    type = parameter.Type.ToString()
+                }),
+                // ToString() here to have the method as a nice string otherwise it will just show the enum value
+                method = request.Method.ToString(),
+                //// This will generate the actual Uri used in the request
+                //uri = _restClient.BuildUri(request),
+            };
+
+            return JsonConvert.SerializeObject(new { requestToLog });
+        }
+
+        private string LogResponse(IRestResponse response)
+        {
+            var responseToLog = new
+            {
+                statusCode = response.StatusCode,
+                content = response.Content,
+                headers = response.Headers,
+                // The Uri that actually responded (could be different from the requestUri if a redirection occurred)
+                responseUri = response.ResponseUri,
+                errorMessage = response.ErrorMessage,
+            };
+
+            return JsonConvert.SerializeObject(new { responseToLog });
+        }
+
     }
+
 }
