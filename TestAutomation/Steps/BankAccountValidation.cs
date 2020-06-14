@@ -50,10 +50,12 @@ namespace TestAutomation.Steps
             _httpClient.Response = _httpClient.RestClient.ExecuteAsPost(_httpClient.Request, "POST");
         }
 
-        [Given(@"the sample request with a valid JWT token")]
-        public void GivenTheSampleRequestWithAValidJWTToken()
+        [Given(@"the sample request with a valid JWT token and ""(.*)""")]
+        public void GivenTheSampleRequestWithAValidJWTToken(string bankAccount)
         {
             _httpClient.Request.AddHeader(Headers.X_Auth_Key.AsString(EnumFormat.Description), ConfigSettings.ValidToken);
+
+            _httpClient.Request.AddJsonBody(new BankAccountDTO() { BankAccount = bankAccount });
         }
 
 
@@ -61,7 +63,8 @@ namespace TestAutomation.Steps
         [Then(@"Api returns ""(.*)"" name as ""(.*)""")]
         public void ApiReturns(string key, string value)
         {
-            Assert.That(_httpClient.Response.GetResponseObject(key), Is.EqualTo(value), $"The {key} is not matching");
+            var responseValue = _httpClient.Response.GetResponseObject(key);
+            Assert.That(responseValue, Is.EqualTo(value), $"The {key} is not matching.");
         }
     }
 }
