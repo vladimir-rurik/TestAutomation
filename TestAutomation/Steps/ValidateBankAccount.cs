@@ -25,12 +25,9 @@ namespace TestAutomation.Steps
             _httpClient = httpClient;
         }
 
-        [Given(@"a sample request without a JWT token")]
+        [Given(@"the sample request without a JWT token")]
         public void SampleRequestWithoutJWTtoken()
         {
-            _httpClient.Request = new RestRequest(_httpClient.ApiMethodPath, Method.POST);
-            _httpClient.Request.AddHeader("Content-Type", "application/json");
-
             BankAccountDTO bankAccountDTO = new BankAccountDTO()
             {
                 BankAccount = "GB09HAOE91311808002317"
@@ -38,7 +35,7 @@ namespace TestAutomation.Steps
             _httpClient.Request.AddJsonBody(bankAccountDTO);
         }
 
-        [Given(@"a sample request with an empty JWT token")]
+        [Given(@"tha sample request with an empty JWT token")]
         public void SampleRequestWithEmptyJWTtoken()
         {
             _httpClient.Request.AddHeader("X-Auth-Key", "");
@@ -56,6 +53,13 @@ namespace TestAutomation.Steps
             //TODO: async?
             _httpClient.Response = _httpClient.RestClient.ExecuteAsPost(_httpClient.Request, "POST");
         }
+
+        [Given(@"the sample request with a valid JWT token")]
+        public void GivenTheSampleRequestWithAValidJWTToken()
+        {
+            _httpClient.Request.AddHeader("X-Auth-Key", "");
+        }
+
 
         [Then(@"Api returns ""(.*)"" name as ""(.*)""")]
         public void ApiReturns(string key, string value)

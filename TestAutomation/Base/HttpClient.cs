@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using NUnit.Framework;
+using RestSharp;
 using System;
 
 namespace TestAutomation.Base

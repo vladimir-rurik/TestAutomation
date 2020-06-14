@@ -15,7 +15,7 @@ namespace TestAutomation.Steps
             _httpClient = httpClient;
         }
 
-        [Given(@"a ssmple request with a json content type")]
+        [Given(@"a sample request with a json content type")]
         public void GivenASsmpleRequestWithAJsonContentType()
         {
             _httpClient.Request = new RestRequest(_httpClient.ApiMethodPath, Method.POST);
