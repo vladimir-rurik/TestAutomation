@@ -41,15 +41,11 @@ namespace TestAutomation.Steps
             _httpClient.Request.AddJsonBody(bankAccountDTO);
         }
 
-        [Given(@"tha sample request with an empty JWT token")]
-        public void SampleRequestWithEmptyJWTtoken()
+        [Given(@"the sample request with an empty JWT token and (.*)")]
+        public void SampleRequestWithEmptyJWTtoken(BankAccountDTO bankAccountDTO)
         {
             _httpClient.Request.AddHeader(Headers.X_Auth_Key.AsString(EnumFormat.Description), "");
 
-            BankAccountDTO bankAccountDTO = new BankAccountDTO()
-            {
-                BankAccount = "GB09HAOE91311808002317"
-            };
             _httpClient.Request.AddJsonBody(bankAccountDTO);
         }
 
@@ -65,6 +61,7 @@ namespace TestAutomation.Steps
         {
             _httpClient.Request.AddHeader(Headers.X_Auth_Key.AsString(EnumFormat.Description), _config["validToken"]);
         }
+
 
 
         [Then(@"Api returns ""(.*)"" name as ""(.*)""")]

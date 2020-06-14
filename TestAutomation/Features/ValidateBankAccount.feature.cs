@@ -130,12 +130,17 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request with an empty JWT token")]
         [NUnit.Framework.CategoryAttribute("negativeCase")]
-        public virtual void VerifyAnErrorResponseToASampleRequestWithAnEmptyJWTToken()
+        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002317", null)]
+        public virtual void VerifyAnErrorResponseToASampleRequestWithAnEmptyJWTToken(string bankAccount, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "negativeCase"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request with an empty JWT token", null, new string[] {
-                        "negativeCase"});
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request with an empty JWT token", null, @__tags);
 #line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -160,7 +165,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 15
- testRunner.Given("tha sample request with an empty JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("tha sample request with an empty JWT token and {0}", bankAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 16
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -181,7 +186,7 @@ this.FeatureBackground();
                     "positiveCase"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify a valid response to a sample request with a valid JWT token", null, new string[] {
                         "positiveCase"});
-#line 20
+#line 24
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -204,10 +209,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-#line 21
+#line 25
  testRunner.Given("the sample request with a valid JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 22
+#line 26
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             }
