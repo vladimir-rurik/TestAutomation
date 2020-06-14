@@ -15,6 +15,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MongoDB.Bson;
 using Microsoft.Extensions.Configuration;
+using System.ComponentModel;
+using AventStack.ExtentReports.Configuration;
 
 namespace TestAutomation.Hooks
 {
@@ -26,33 +28,25 @@ namespace TestAutomation.Hooks
         private static AventStack.ExtentReports.ExtentReports _extent;
 
         private ExtentTest _scenario;
-        private HttpClient _httpCleint;
+        private HttpClient _httpClient;
+        private ConfigSettings _config;
         private ScenarioContext _scenarioContext;
 
 
-        public Binding(HttpClient httpClient, ScenarioContext scenarioContext)
+        public Binding(HttpClient httpClient, ScenarioContext scenarioContext, ConfigSettings config)
         {
-            _httpCleint = httpClient;
+            _httpClient = httpClient;
             _scenarioContext = scenarioContext;
+            _config = config;
         }
 
-        public static IConfiguration InitConfiguration()
-        {
-            IConfigurationRoot config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.test.json")
-                .Build();
-            return config;
-        }
+
 
         [BeforeScenario]
         public void TestSetup()
         {
-            IConfiguration config = InitConfiguration();
-
-            _httpCleint.BaseUrl = new Uri(config["baseUrl"]);
-            _httpCleint.RestClient.BaseUrl = _httpCleint.BaseUrl;
-
-            _httpCleint.ApiMethodPath = config["apiMethodPath"];
+            _httpClient.RestClient.BaseUrl = _config.BaseUrl;
+            _httpClient.ApiMethodPath = _config.ApiMethodPath;
         }
 
         [BeforeTestRun]
@@ -99,8 +93,8 @@ namespace TestAutomation.Hooks
                         break;
                     case nameof(When):
                         _scenario.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text);
-                        _scenario.CreateNode<When>($"<pre>{LogRequest(_httpCleint.Request)}</pre>");
-                        _scenario.CreateNode<When>($"<pre>{LogResponse(_httpCleint.Response)}</pre>");
+                        _scenario.CreateNode<When>($"<pre>{LogRequest(_httpClient.Request)}</pre>");
+                        _scenario.CreateNode<When>($"<pre>{LogResponse(_httpClient.Response)}</pre>");
 
                         break;
                     case nameof(Then):

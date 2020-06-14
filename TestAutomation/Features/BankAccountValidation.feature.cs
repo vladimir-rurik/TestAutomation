@@ -130,17 +130,12 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify an error response to a sample request with an empty JWT token")]
         [NUnit.Framework.CategoryAttribute("negativeCase")]
-        [NUnit.Framework.TestCaseAttribute("GB09HAOE91311808002317", null)]
-        public virtual void VerifyAnErrorResponseToASampleRequestWithAnEmptyJWTToken(string bankAccount, string[] exampleTags)
+        public virtual void VerifyAnErrorResponseToASampleRequestWithAnEmptyJWTToken()
         {
-            string[] @__tags = new string[] {
+            string[] tagsOfScenario = new string[] {
                     "negativeCase"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request with an empty JWT token", null, @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify an error response to a sample request with an empty JWT token", null, new string[] {
+                        "negativeCase"});
 #line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -165,55 +160,13 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 15
- testRunner.Given(string.Format("the sample request with an empty JWT token and \"{0}\"", bankAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("the sample request with an empty JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 16
  testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 17
  testRunner.Then("Api returns \"message\" name as \"Authorization has been denied for this request.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify a valid response to a sample request with a valid JWT token")]
-        [NUnit.Framework.CategoryAttribute("positiveCase")]
-        public virtual void VerifyAValidResponseToASampleRequestWithAValidJWTToken()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "positiveCase"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify a valid response to a sample request with a valid JWT token", null, new string[] {
-                        "positiveCase"});
-#line 24
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 4
-this.FeatureBackground();
-#line hidden
-#line 25
- testRunner.Given("the sample request with a valid JWT token", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 26
- testRunner.When("the sample request is posted to api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             }
             this.ScenarioCleanup();

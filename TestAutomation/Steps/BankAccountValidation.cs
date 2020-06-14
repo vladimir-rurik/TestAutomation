@@ -23,9 +23,9 @@ namespace TestAutomation.Steps
     class BankAccountValidation
     {
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _config;
+        private readonly ConfigSettings _config;
 
-        public BankAccountValidation(HttpClient httpClient, IConfiguration config)
+        public BankAccountValidation(HttpClient httpClient, ConfigSettings config)
         { 
             _httpClient = httpClient;
             _config = config;
@@ -41,8 +41,8 @@ namespace TestAutomation.Steps
             _httpClient.Request.AddJsonBody(bankAccountDTO);
         }
 
-        [Given(@"the sample request with an empty JWT token and ""(.*)""")]
-        public void SampleRequestWithEmptyJWTtoken(string bankAccount)
+        [Given(@"the sample request with an empty JWT token")]
+        public void SampleRequestWithEmptyJWTtoken()
         {
             _httpClient.Request.AddHeader(Headers.X_Auth_Key.AsString(EnumFormat.Description), "");
 
@@ -59,7 +59,7 @@ namespace TestAutomation.Steps
         [Given(@"the sample request with a valid JWT token")]
         public void GivenTheSampleRequestWithAValidJWTToken()
         {
-            _httpClient.Request.AddHeader(Headers.X_Auth_Key.AsString(EnumFormat.Description), _config["validToken"]);
+            _httpClient.Request.AddHeader(Headers.X_Auth_Key.AsString(EnumFormat.Description), _config.ValidToken);
         }
 
 

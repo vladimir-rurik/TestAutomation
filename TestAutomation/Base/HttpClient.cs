@@ -6,7 +6,6 @@ namespace TestAutomation.Base
 {
     public class HttpClient
     {
-        public Uri BaseUrl { get; set; }
         public string ApiMethodPath { get; set; }
         public IRestResponse Response { get; set; }
         public IRestRequest Request { get; set; }
