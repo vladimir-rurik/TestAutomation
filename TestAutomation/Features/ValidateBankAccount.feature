@@ -1,6 +1,9 @@
 ﻿Feature: ValidateBankAccount
 	Validates and evaluates the account in the context of direct debit payment.
 
+Background: 
+	Given a ssmple request with a json content type
+
 @negativeCase
 Scenario: Verify an error response to a sample request without a JWT token
 	Given a sample request without a JWT token

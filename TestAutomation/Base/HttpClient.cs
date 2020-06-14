@@ -3,7 +3,7 @@ using System;
 
 namespace TestAutomation.Base
 {
-    public class Settings
+    public class HttpClient
     {
         public Uri BaseUrl { get; set; }
         public string ApiMethodPath { get; set; }

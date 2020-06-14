@@ -25,23 +25,23 @@ namespace TestAutomation.Hooks
         private static AventStack.ExtentReports.ExtentReports _extent;
 
         private ExtentTest _scenario;
-        private Settings _settings;
+        private HttpClient _httpCleint;
         private ScenarioContext _scenarioContext;
 
 
-        public Binding(Settings settings, ScenarioContext scenarioContext)
+        public Binding(HttpClient httpClient, ScenarioContext scenarioContext)
         {
-            _settings = settings;
+            _httpCleint = httpClient;
             _scenarioContext = scenarioContext;
         }
 
         [BeforeScenario]
         public void TestSetup()
         {
-            _settings.BaseUrl = new Uri("https://api-test.afterpay.dev/");
-            _settings.RestClient.BaseUrl = _settings.BaseUrl;
+            _httpCleint.BaseUrl = new Uri("https://api-test.afterpay.dev/");
+            _httpCleint.RestClient.BaseUrl = _httpCleint.BaseUrl;
 
-            _settings.ApiMethodPath = "api/v3/validate/bank-account";
+            _httpCleint.ApiMethodPath = "api/v3/validate/bank-account";
         }
 
         [BeforeTestRun]
@@ -88,8 +88,8 @@ namespace TestAutomation.Hooks
                         break;
                     case nameof(When):
                         _scenario.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text);
-                        _scenario.CreateNode<When>($"<pre>{LogRequest(_settings.Request)}</pre>");
-                        _scenario.CreateNode<When>($"<pre>{LogResponse(_settings.Response)}</pre>");
+                        _scenario.CreateNode<When>($"<pre>{LogRequest(_httpCleint.Request)}</pre>");
+                        _scenario.CreateNode<When>($"<pre>{LogResponse(_httpCleint.Response)}</pre>");
 
                         break;
                     case nameof(Then):
