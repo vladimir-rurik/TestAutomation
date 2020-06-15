@@ -54,11 +54,22 @@ Scenario Outline: Verify an external validation for a sample request with a VALI
 		And Api returns "*riskCheckMessages" name as "<*riskCheckMessages>"
 
 	Examples: 
-		| Description  | bankAccount            | statusCode | isValid | *riskCheckMessages |
-		| valid IBAN   | GB09HAOE91311808002317 | 200        | True    |                    |
-		| invalid IBAN | GB09HAOE91311808002318 | 200        | False   | ^(?!\s*$).+        |
-		| valid IBAN   | DE87123456781234567890 | 200        | True    |                    |
-		| invalid IBAN | DE87123456781234567891 | 200        | False   | ^(?!\s*$).+        |
-
-		
-
+		| Description  | bankAccount              | statusCode | isValid | *riskCheckMessages |
+		| valid IBAN   | GB09HAOE91311808002317   | 200        | True    |                    |
+		| invalid IBAN | GB09HAOE91311808002318   | 200        | False   | ^(?!\s*$).+        |
+		| valid IBAN   | DE87123456781234567890   | 200        | True    |                    |
+		| invalid IBAN | DE87123456781234567891   | 200        | False   | ^(?!\s*$).+        |
+		| valid IBAN   | DK5000400440116243       | 200        | True    |                    |
+		| invalid IBAN | DK5000400440116244       | 200        | False   | ^(?!\s*$).+        |
+		| valid IBAN   | AT611904300234573201     | 200        | True    |                    |
+		| invalid IBAN | AT6119043002345732013    | 200        | False   | ^(?!\s*$).+        |
+		| valid IBAN   | CH9300762011623852957    | 200        | True    |                    |
+		| invalid IBAN | CH9300762011623852958    | 200        | False   | ^(?!\s*$).+        |
+		| valid IBAN   | FI2112345600000785       | 200        | True    |                    |
+		| invalid IBAN | FI2112345600000786       | 200        | False   | ^(?!\s*$).+        |
+		| valid IBAN   | SE4550000000058398257466 | 200        | True    |                    |
+		| invalid IBAN | SE4550000000058398257467 | 200        | False   | ^(?!\s*$).+        |
+		| valid IBAN   | NO9386011117947		  | 200        | True    |                    |
+		| invalid IBAN | NO9386011117948		  | 200        | False   | ^(?!\s*$).+        |
+		| valid IBAN   | MZ97123412341234123412341| 200        | True    |                    |
+		| invalid IBAN | MZ9712341234123412341234 | 200        | False   | ^(?!\s*$).+        |

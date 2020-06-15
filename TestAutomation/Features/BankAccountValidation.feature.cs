@@ -269,6 +269,20 @@ this.FeatureBackground();
         [NUnit.Framework.TestCaseAttribute("invalid IBAN", "GB09HAOE91311808002318", "200", "False", "^(?!\\s*$).+", null)]
         [NUnit.Framework.TestCaseAttribute("valid IBAN", "DE87123456781234567890", "200", "True", "", null)]
         [NUnit.Framework.TestCaseAttribute("invalid IBAN", "DE87123456781234567891", "200", "False", "^(?!\\s*$).+", null)]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "DK5000400440116243", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "DK5000400440116244", "200", "False", "^(?!\\s*$).+", null)]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "AT611904300234573201", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "AT6119043002345732013", "200", "False", "^(?!\\s*$).+", null)]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "CH9300762011623852957", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "CH9300762011623852958", "200", "False", "^(?!\\s*$).+", null)]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "FI2112345600000785", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "FI2112345600000786", "200", "False", "^(?!\\s*$).+", null)]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "SE4550000000058398257466", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "SE4550000000058398257467", "200", "False", "^(?!\\s*$).+", null)]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "NO9386011117947", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "NO9386011117948", "200", "False", "^(?!\\s*$).+", null)]
+        [NUnit.Framework.TestCaseAttribute("valid IBAN", "MZ97123412341234123412341", "200", "True", "", null)]
+        [NUnit.Framework.TestCaseAttribute("invalid IBAN", "MZ9712341234123412341234", "200", "False", "^(?!\\s*$).+", null)]
         public virtual void VerifyAnExternalValidationForASampleRequestWithAVALIDJWTTokenAndDifferentBankAccounts(string description, string bankAccount, string statusCode, string isValid, string riskCheckMessages, string[] exampleTags)
         {
             string[] @__tags = new string[] {
