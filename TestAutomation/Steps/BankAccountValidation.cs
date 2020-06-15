@@ -60,13 +60,13 @@ namespace TestAutomation.Steps
                 key = key.Substring(1);
                 var responseValue = _httpClient.Response.GetResponseContentObject(key);
 
-                Assert.That(responseValue, Does.Match(value), $"The content key:{key} is not matching.");
+                Assert.That(responseValue, Does.Match(value), $"The content key:{key} does not match.");
             }
             else
             {
                 var responseValue = _httpClient.Response.GetResponseContentObject(key);
 
-                Assert.That(responseValue, Is.EqualTo(value), $"The content key:{key} is not matching.");
+                Assert.That(responseValue, Is.EqualTo(value), $"The content key:{key} does not match.");
             }
         }
 

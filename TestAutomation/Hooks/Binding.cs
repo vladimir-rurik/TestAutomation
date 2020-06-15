@@ -16,7 +16,7 @@ namespace TestAutomation.Hooks
     [Binding]
     public class Binding
     {
-        //Global Variable for Extend report
+        //Global Variable for an Extent Framework report
         private static ExtentTest _featureName;
         private static AventStack.ExtentReports.ExtentReports _extent;
 
@@ -48,7 +48,7 @@ namespace TestAutomation.Hooks
             string file = "ExtentReport.html";
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, file);
 
-            //Initialize an Extent report before starting the test
+            //Initialize an Extent Framework report before starting the test
             ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(path);
             htmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
 
