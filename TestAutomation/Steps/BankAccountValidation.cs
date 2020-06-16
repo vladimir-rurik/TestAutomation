@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using TestAutomation.Base;
 using TestAutomation.Model;
@@ -38,10 +39,9 @@ namespace TestAutomation.Steps
         }
 
         [When(@"the sample request is posted to api")]
-        public void WhenTheSampleRequestIsPostedToApi()
+        public async Task WhenTheSampleRequestIsPostedToApiAsync()
         {
-            //TODO: async?
-            _httpClient.Response = _httpClient.RestClient.ExecuteAsPost(_httpClient.Request, "POST");
+            _httpClient.Response = await _httpClient.RestClient.ExecuteAsync(_httpClient.Request);
         }
 
         [Given(@"the sample request with a valid JWT token and ""(.*)""")]
